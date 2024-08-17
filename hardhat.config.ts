@@ -2,6 +2,8 @@ import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 // https://github.com/projectsophon/hardhat-circom
 import "hardhat-circom";
+import * as dotenv from "dotenv";
+dotenv.config();
 // circuits
 import circuits = require('./circuits.config.json')
 
@@ -22,6 +24,12 @@ const config: HardhatUserConfig = {
       }
     ]
   },
+  networks: {
+    zkEVM: {
+    url: `https://rpc.cardona.zkevm-rpc.com`,
+    accounts: [process.env.ACCOUNT_PRIVATE_KEY],
+    },
+},
   circom: {
     // (optional) Base path for input files, defaults to `./circuits/`
     inputBasePath: "./circuits",
